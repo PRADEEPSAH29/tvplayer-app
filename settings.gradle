@@ -1,2 +1,2 @@
+rootProject.name = "tvplayer-exoplayer"
 include ':app'
-rootProject.name='TVPlayerProject'

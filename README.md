@@ -1,15 +1,30 @@
-TV Player Project
+# TV Player - ExoPlayer Project
 
-Open this project in Android Studio and run/build to produce an APK.
+This is a minimal Android Studio project using ExoPlayer.
 
-Notes:
-- The project includes one pre-filled channel (Star Sports 1 HD) with a logo placed at:
-  app/src/main/res/drawable/Star_Sports_HD1.webp
-- The stream URL used is: https://streamcrichd.com/update/star.php
-- If the stream is an HTML iframe-only embed, ExoPlayer may not play it directly. You might need the direct playlist (.m3u8) or use a WebView player instead.
+## IMPORTANT - Gradle wrapper
+This repo includes `gradlew` scripts and `gradle/wrapper/gradle-wrapper.properties`, but **does NOT** include `gradle/wrapper/gradle-wrapper.jar`.
+To build locally or on CI you have two choices:
 
-Build steps:
-1. Open Android Studio -> File -> Open -> select the folder /path/to/tvplayer_project
-2. Let Gradle sync. If prompted, install/update SDK/Gradle as needed.
-3. Run the app on a device or emulator, or Build -> Build Bundle(s) / APK(s) -> Build APK(s).
+1. **Generate and commit the wrapper locally** (recommended)
+   - Run on your machine (with Gradle installed):
+     ```
+     gradle wrapper --gradle-version 8.0
+     ```
+   - This will create `gradle/wrapper/gradle-wrapper.jar`. Commit that file and push.
 
+2. **Run with system Gradle on CI**
+   - Modify your GitHub Actions workflow to install Gradle or use an action that provides Gradle, or ensure the runner has Gradle.
+
+## How to set your stream URL
+Open `app/src/main/java/com/example/tvplayer/MainActivity.java` and replace:
+```
+String url = "REPLACE_WITH_M3U8_OR_MP4_URL";
+```
+with your stream URL (M3U8 or MP4).
+
+## Build
+After committing the wrapper jar, the standard build command works:
+```
+./gradlew assembleRelease
+```
